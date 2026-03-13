@@ -362,7 +362,17 @@
     </div>
 </div>
 
-
+<!-- MODAL OVERLAY -->
+<div id="modalOverlay" style="position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(15,23,42,0.8); display:none; justify-content:center; align-items:center; z-index:4000; padding:20px;">
+    <div style="background:white; border:3px solid #1e293b; border-radius:20px; padding:24px; width:100%; max-width:320px; box-shadow:8px 8px 0px #1e293b;">
+        <h3 id="modalTitle" style="margin:0 0 10px 0; font-weight:900; color: #0f172a;"></h3>
+        <p id="modalBody" style="font-size:14px; margin-bottom:20px; color: #64748b;"></p>
+        <div style="display:flex; gap:10px;">
+            <button onclick="closeModal()" style="flex:1; padding:12px; border-radius:12px; border:2px solid #1e293b; font-weight:800; cursor: pointer;">Cancel</button>
+            <button id="modalConfirmBtn" style="flex:1; padding:12px; border-radius:12px; background:#ef4444; color:white; border:none; font-weight:800; cursor: pointer;">Yes, Do it</button>
+        </div>
+    </div>
+</div>
 
 <script>
     /* SCROLL BEHAVIOR FOR NAV */
@@ -506,7 +516,7 @@
             const row = document.createElement('div');
             row.className = 'list-row';
             row.innerHTML = `<div class="info"><b>+${num}</b><span style="font-size: 10px; font-weight: 800; text-transform: uppercase;">${isDone?'Sent':'Ready'}</span></div>
-                             <a href=https://wa.me/${num}${state.msg ? '?text=' + encodeURIComponent(state.msg) : ''}</a>`;
+                             <a href="https://wa.me/${num}?text=${encodeURIComponent(state.msg)}" target="_blank" class="btn-send ${isDone?'done':''}" onclick="markAsSent('${num}')">${isDone?'SENT':'SEND'}</a>`;
             container.appendChild(row);
         });
         const done = state.sent.filter(n => raw.includes(n)).length;
